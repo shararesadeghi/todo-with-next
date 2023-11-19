@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { CredentialsProvider } from "next-auth/providers";
+import  CredentialsProvider  from "next-auth/providers/credentials";
 import User from "../../../models/User";
 import { verifyPassword } from "../../../utils/auth";
 import connectDB from "../../../utils/connectDB";
@@ -29,7 +29,7 @@ const authOptions = {
 
         const isValid = await verifyPassword(password, user.password);
 
-        if (!isVlaid) throw new Error("Username or password in incorrect!");
+        if (!isValid) throw new Error("Username or password in incorrect!");
         return { email };
       },
     }),
