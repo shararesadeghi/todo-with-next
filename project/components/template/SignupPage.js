@@ -10,12 +10,12 @@ const SignupPage = () => {
 
   const signupHandler = async () => {
     const res = await fetch("/api/auth/signup", {
-      metod: "POST",
+      method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
-    console.log(date);
+    console.log(data);
     if (data.status === "success") router.push("/signin");
   };
   return (
