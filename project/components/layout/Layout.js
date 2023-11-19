@@ -3,7 +3,7 @@ import { VscListSelection } from "react-icons/vsc";
 import { BiMessageAltAdd } from "react-icons/bi";
 import { RxDashboard } from "react-icons/rx";
 
-const Layout = () => {
+const Layout = ({children}) => {
   return (
     <div className="container">
       <header>
@@ -27,6 +27,7 @@ const Layout = () => {
             </li>
           </ul>
         </aside>
+        <section>{children}</section>
       </div>
     </div>
   );
