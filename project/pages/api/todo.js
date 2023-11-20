@@ -2,7 +2,6 @@ import { getSession } from "next-auth/react";
 import connectDB from './../../utils/connectDB';
 import User from './../../models/User';
 
-
 async function handler(req, res) {
   try {
     await connectDB();
@@ -10,11 +9,10 @@ async function handler(req, res) {
     console.log(error);
     return res
       .status(500)
-      .json({ status: "failed", message: "Error in connecting to DB!" });
+      .json({ status: "failed", message: "Error connecting to DB" });
   }
 
-  const session = await getSession({ req });
-
+  const session =await getSession({ req });
   if (!session) {
     return res
       .status(401)
@@ -30,17 +28,15 @@ async function handler(req, res) {
 
   if (req.method === "POST") {
     const { title, status } = req.body;
-
     if (!title || !status) {
       return res
         .status(422)
-        .json({ status: "failed", message: "Invalid data!" });
+        .json({ status: "failed", message: "Invalid data" });
     }
-
     user.todos.push({ title, status });
     user.save();
 
-    res.status(201).json({ status: "success", message: "Todo created!" });
+    res.status(201).json({ status: "success", message: "Todo Created" });
   }
 }
 

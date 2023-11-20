@@ -1,37 +1,36 @@
-import User from "../../../models/User";
-import { hashPassword } from "../../../utils/auth";
-import connectDB from "../../../utils/connectDB";
+import User from "../../../../model/User";
+import { hashPassword } from "../../../../utils/auth";
+import connectDB from "../../../../utils/connectDB";
 
-async function handler(req, res) {
-  if (req.method !== "POST") return;
 
-  try {
-    await connectDB();
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ status: "failed", message: "Error in connecting to DB" });
-  }
+async function handler(req , res){
+    if(req.method !== "POST") return;
 
-  const { email, password } = req.body;
+    try{
+        await connectDB();
+        console.log("Connected to DB");
 
-  if (!email || !password) {
-    return res.status(422).json({ status: "failed", message: "Invalid Data" });
-  }
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({status :"failed" , message :"Error connecting to DB"});
+    }
 
-  const existingUser = await User.findOne({ email: email });
-  if (existingUser) {
-    return res
-      .status(422)
-      .json({ status: "failed", message: "User existed already!" });
-  }
+    const {email , password} = req.body;
 
-  const hashedPassword = await hashPassword(password);
+    if(!email || !password){
+        return res.status(422).json({status:"failed" , message : "Invalid Data"});
+    }
 
-  const newUser = await User.create({ email: email, password: hashedPassword });
+    const existingUser = await User.findOne({email : email});
+    if(existingUser){
+        return res.status(422).json({status :"failed" , message : "User Existed Already!"});
+    }
+    const hashedPassword = await hashPassword(password);
 
-  res.status(200).json({ status: "success", message: "created User!" });
+    const newUser = await User.create({email : email , password : hashedPassword});
+            console.log(newUser);
+        res.status(201).json({status : "success" , message: "Created User"})  ;  
+
 }
 
 export default handler;
