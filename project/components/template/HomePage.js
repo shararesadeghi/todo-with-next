@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Tasks from "../module/Tasks";
 
 const HomePage = () => {
   const [todos, setTodos] = useState([]);
@@ -16,15 +17,19 @@ const HomePage = () => {
   return <div className="home-page">
       <div className="home-page--todo">
           <p>Todo</p>
+          <Tasks data={todos.todo}/>
       </div>
       <div className="home-page--inProgress">
           <p>In Progress</p>
+          <Tasks data={todos.inProgress}/>
       </div>
       <div className="home-page--review">
           <p>Review</p>
+          <Tasks data={todos.review}/>
       </div>
       <div className="home-page--done">
           <p>Done</p>
+          <Tasks data={todos.done}/>
       </div>
   </div>;
 };
