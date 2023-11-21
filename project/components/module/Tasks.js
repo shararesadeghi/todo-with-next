@@ -10,7 +10,7 @@ const Tasks = ({data, fetchTodos, next,back}) => {
                 <h4>{item.title}</h4>
                 <div>
                     {back ?  <button className="button-back"> <BiLeftArrow/> Back</button> : null}
-                    {next ? <button className="button-naxt">Next <BiRightArrow/></button> : null}
+                    {next ? <button className="button-next">Next <BiRightArrow/></button> : null}
                 </div>
             </div>)}
             
