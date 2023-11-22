@@ -15,7 +15,7 @@ const Layout = ({children}) => {
     <div className="container">
         <header>
             <p> Todo App</p>
-            {status ? <button onClick={logoutHandler}>Logout <FiLogOut/> </button> : null}
+            {status ==="authenticated" ? <button onClick={logoutHandler}>Logout <FiLogOut/> </button> : null}
         </header>
         <div className="container--main">
             <aside>
